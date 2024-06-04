@@ -38,9 +38,10 @@
                                     <input class="au-input au-input--full" type="password" name="password"
                                         placeholder="Password" id="password" required>
                                 </div>
-
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" name="submit"
-                                    type="submit">sign in</button>
+                                <div style="color:#c43b68">
+                                    <button class="au-btn au-btn--block au-btn--green m-b-20" name="submit"
+                                        type="submit">sign in</button>
+                                </div>
                                 <div>
                                     <center> Not a member?<a href="register">Signup now</a></center>
                                 </div>

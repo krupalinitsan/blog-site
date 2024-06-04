@@ -46,9 +46,8 @@
                                         placeholder="Password" required id="password">
                                     <span class="error text-danger" id="passwordError"></span>
                                 </div>
-
-                                <button class="au-btn au-btn--block au-btn--green m-b-20"  name="regist" type="submit">sign in</button>
-
+                                    <button class="au-btn au-btn--block au-btn--green m-b-20" name="regist"
+                                        type="submit">sign in</button>
                             </form>
                         </div>
                     </div>

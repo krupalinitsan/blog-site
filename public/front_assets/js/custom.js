@@ -1,359 +1,133 @@
-/** 
-  * Template Name: Daily Shop
-  * Version: 1.0  
-  * Template Scripts
-  * Author: MarkUps
-  * Author URI: http://www.markups.io/
+function send_message(){
+	var name=jQuery("#name").val();
+	var email=jQuery("#email").val();
+	var mobile=jQuery("#mobile").val();
+	var message=jQuery("#message").val();
+	
+	if(name==""){
+		alert('Please enter name');
+	}else if(email==""){
+		alert('Please enter email');
+	}else if(mobile==""){
+		alert('Please enter mobile');
+	}else if(message==""){
+		alert('Please enter message');
+	}else{
+		jQuery.ajax({
+			url:'send_message.php',
+			type:'post',
+			data:'name='+name+'&email='+email+'&mobile='+mobile+'&message='+message,
+			success:function(result){
+				alert(result);
+			}	
+		});
+	}
+}
 
-  Custom JS
-  
-
-  1. CARTBOX
-  2. TOOLTIP
-  3. PRODUCT VIEW SLIDER 
-  4. POPULAR PRODUCT SLIDER (SLICK SLIDER) 
-  5. FEATURED PRODUCT SLIDER (SLICK SLIDER)
-  6. LATEST PRODUCT SLIDER (SLICK SLIDER) 
-  7. TESTIMONIAL SLIDER (SLICK SLIDER)
-  8. CLIENT BRAND SLIDER (SLICK SLIDER)
-  9. PRICE SLIDER  (noUiSlider SLIDER)
-  10. SCROLL TOP BUTTON
-  11. PRELOADER
-  12. GRID AND LIST LAYOUT CHANGER 
-  13. RELATED ITEM SLIDER (SLICK SLIDER)
-
-  
-**/
-
-jQuery(function($){
-
-
-  /* ----------------------------------------------------------- */
-  /*  1. CARTBOX 
-  /* ----------------------------------------------------------- */
-    
-     jQuery(".aa-cartbox").hover(function(){
-      jQuery(this).find(".aa-cartbox-summary").fadeIn(500);
-    }
-      ,function(){
-          jQuery(this).find(".aa-cartbox-summary").fadeOut(500);
-      }
-     );   
-  
-  /* ----------------------------------------------------------- */
-  /*  2. TOOLTIP
-  /* ----------------------------------------------------------- */    
-    jQuery('[data-toggle="tooltip"]').tooltip();
-    jQuery('[data-toggle2="tooltip"]').tooltip();
-
-  /* ----------------------------------------------------------- */
-  /*  3. PRODUCT VIEW SLIDER 
-  /* ----------------------------------------------------------- */    
-
-    jQuery('#demo-1 .simpleLens-thumbnails-container img').simpleGallery({
-        loading_image: 'demo/images/loading.gif'
-    });
-
-    jQuery('#demo-1 .simpleLens-big-image').simpleLens({
-        loading_image: 'demo/images/loading.gif'
-    });
-
-  /* ----------------------------------------------------------- */
-  /*  4. POPULAR PRODUCT SLIDER (SLICK SLIDER)
-  /* ----------------------------------------------------------- */      
-
-    jQuery('.aa-popular-slider').slick({
-      dots: false,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
-      ]
-    }); 
-
-  
-  /* ----------------------------------------------------------- */
-  /*  5. FEATURED PRODUCT SLIDER (SLICK SLIDER)
-  /* ----------------------------------------------------------- */      
-
-    jQuery('.aa-featured-slider').slick({
-        dots: false,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
-        ]
-    });
-    
-  /* ----------------------------------------------------------- */
-  /*  6. LATEST PRODUCT SLIDER (SLICK SLIDER)
-  /* ----------------------------------------------------------- */      
-    jQuery('.aa-latest-slider').slick({
-        dots: false,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
-        ]
-    });
-
-  /* ----------------------------------------------------------- */
-  /*  7. TESTIMONIAL SLIDER (SLICK SLIDER)
-  /* ----------------------------------------------------------- */     
-    
-    jQuery('.aa-testimonial-slider').slick({
-      dots: true,
-      infinite: true,
-      arrows: false,
-      speed: 300,
-      slidesToShow: 1,
-      adaptiveHeight: true
-    });
-
-  /* ----------------------------------------------------------- */
-  /*  8. CLIENT BRAND SLIDER (SLICK SLIDER)
-  /* ----------------------------------------------------------- */  
-
-    jQuery('.aa-client-brand-slider').slick({
-        dots: false,
-        infinite: false,
-        speed: 300,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 4,
-              infinite: true,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
-        ]
-    });
-
-  /* ----------------------------------------------------------- */
-  /*  9. PRICE SLIDER  (noUiSlider SLIDER)
-  /* ----------------------------------------------------------- */        
-
-    jQuery(function(){
-      if($('body').is('.productPage')){
-       var skipSlider = document.getElementById('skipstep');
-        noUiSlider.create(skipSlider, {
-            range: {
-                'min': 0,
-                '10%': 10,
-                '20%': 20,
-                '30%': 30,
-                '40%': 40,
-                '50%': 50,
-                '60%': 60,
-                '70%': 70,
-                '80%': 80,
-                '90%': 90,
-                'max': 100
-            },
-            snap: true,
-            connect: true,
-            start: [20, 70]
-        });
-        // for value print
-        var skipValues = [
-          document.getElementById('skip-value-lower'),
-          document.getElementById('skip-value-upper')
-        ];
-
-        skipSlider.noUiSlider.on('update', function( values, handle ) {
-          skipValues[handle].innerHTML = values[handle];
-        });
-      }
-    });
+function user_register(){
+	jQuery('.field_error').html('');
+	var name=jQuery("#name").val();
+	var email=jQuery("#email").val();
+	var mobile=jQuery("#mobile").val();
+	var password=jQuery("#password").val();
+	var is_error='';
+	if(name==""){
+		jQuery('#name_error').html('Please enter name');
+		is_error='yes';
+	}if(email==""){
+		jQuery('#email_error').html('Please enter email');
+		is_error='yes';
+	}if(mobile==""){
+		jQuery('#mobile_error').html('Please enter mobile');
+		is_error='yes';
+	}if(password==""){
+		jQuery('#password_error').html('Please enter password');
+		is_error='yes';
+	}
+	if(is_error==''){
+		jQuery.ajax({
+			url:'register_submit.php',
+			type:'post',
+			data:'name='+name+'&email='+email+'&mobile='+mobile+'&password='+password,
+			success:function(result){
+				if(result=='email_present'){
+					jQuery('#email_error').html('Email id already present');
+				}
+				if(result=='insert'){
+					jQuery('.register_msg p').html('Thank you for registeration');
+				}
+			}	
+		});
+	}
+	
+}
 
 
-    
-  /* ----------------------------------------------------------- */
-  /*  10. SCROLL TOP BUTTON
-  /* ----------------------------------------------------------- */
-
-  //Check to see if the window is top if not then display button
-
-    jQuery(window).scroll(function(){
-      if ($(this).scrollTop() > 300) {
-        $('.scrollToTop').fadeIn();
-      } else {
-        $('.scrollToTop').fadeOut();
-      }
-    });
-     
-    //Click event to scroll to top
-
-    jQuery('.scrollToTop').click(function(){
-      $('html, body').animate({scrollTop : 0},800);
-      return false;
-    });
-  
-  /* ----------------------------------------------------------- */
-  /*  11. PRELOADER
-  /* ----------------------------------------------------------- */
-
-    jQuery(window).load(function() { // makes sure the whole site is loaded      
-      jQuery('#wpf-loader-two').delay(200).fadeOut('slow'); // will fade out      
-    })
-
-  /* ----------------------------------------------------------- */
-  /*  12. GRID AND LIST LAYOUT CHANGER 
-  /* ----------------------------------------------------------- */
-
-  jQuery("#list-catg").click(function(e){
-    e.preventDefault(e);
-    jQuery(".aa-product-catg").addClass("list");
-  });
-  jQuery("#grid-catg").click(function(e){
-    e.preventDefault(e);
-    jQuery(".aa-product-catg").removeClass("list");
-  });
+function user_login(){
+	jQuery('.field_error').html('');
+	var email=jQuery("#login_email").val();
+	var password=jQuery("#login_password").val();
+	var is_error='';
+	if(email==""){
+		jQuery('#login_email_error').html('Please enter email');
+		is_error='yes';
+	}if(password==""){
+		jQuery('#login_password_error').html('Please enter password');
+		is_error='yes';
+	}
+	if(is_error==''){
+		jQuery.ajax({
+			url:'login_submit.php',
+			type:'post',
+			data:'email='+email+'&password='+password,
+			success:function(result){
+				if(result=='wrong'){
+					jQuery('.login_msg p').html('Please enter valid login details');
+				}
+				if(result=='valid'){
+					window.location.href=window.location.href;
+				}
+			}	
+		});
+	}	
+}
 
 
-  /* ----------------------------------------------------------- */
-  /*  13. RELATED ITEM SLIDER (SLICK SLIDER)
-  /* ----------------------------------------------------------- */      
+function manage_cart(pid,type){
+	if(type=='update'){
+		var qty=jQuery("#"+pid+"qty").val();
+	}else{
+		var qty=jQuery("#qty").val();
+	}
+	jQuery.ajax({
+		url:'manage_cart.php',
+		type:'post',
+		data:'pid='+pid+'&qty='+qty+'&type='+type,
+		success:function(result){
+			if(type=='update' || type=='remove'){
+				window.location.href=window.location.href;
+			}
+			jQuery('.htc__qua').html(result);
+		}	
+	});	
+}
 
-    jQuery('.aa-related-item-slider').slick({
-      dots: false,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
-      ]
-    }); 
-    
-});
+function sort_product_drop(cat_id,site_path){
+	var sort_product_id=jQuery('#sort_product_id').val();
+	window.location.href=site_path+"categories.php?id="+cat_id+"&sort="+sort_product_id;
+}
 
+function wishlist_manage(pid,type){
+	jQuery.ajax({
+		url:'wishlist_manage.php',
+		type:'post',
+		data:'pid='+pid+'&type='+type,
+		success:function(result){
+			if(result=='not_login'){
+				window.location.href='login.php';
+			}else{
+				jQuery('.htc__wishlist').html(result);
+			}
+		}	
+	});	
+}
