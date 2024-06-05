@@ -98,32 +98,37 @@
                 </div>
             <?php endif; ?>
             <div class="card-body">
-                <form id="registrationForm" method="post" action="" name="employeeForm">
+                <form id="registrationForm" method="post" action="" name="employeeForm" enctype="multipart/form-data">
                     <div class="text-center mb-3">
-                        <img src="profile.jpg" alt="Profile Picture" class="profile-image">
+                        <img src="<?php echo $user['image']; ?>" alt="User Image" class="rounded-circle" style="    height: 100px;
+    width: 100px;">
                     </div>
                     <div class="text-center mb-3">
                         <label for="profileImage" class="custom-file-upload">Upload Profile Image</label>
-                        <input type="file" id="profileImage" class="file-input" name="profileImage">
+                        <input type="file" id="profileImage" class="form-control-file" name="img"> 
                     </div>
                     <div class="mb-3">
                         <label for="fname" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="fname" name="fname" required>
+                        <input type="text" class="form-control" id="fname" name="fname"
+                            value="<?php echo $user['firstname']; ?>" required>
                         <span class="error" id="fnameError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="lname" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lname" name="lname" required>
+                        <input type="text" class="form-control" id="lname" name="lname"
+                            value="<?php echo $user['lastname']; ?>" required>
                         <span class="error" id="lnameError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="password" name="password"
+                            value="<?php echo $user['password']; ?>" required>
                         <span class="error" id="passwordError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="email" name="email"
+                            value="<?php echo $user['email']; ?>" required>
                         <span class="error" id="emailError"></span>
                     </div>
                     <br>

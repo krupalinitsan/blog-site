@@ -39,20 +39,16 @@ if (!isset($_SESSION['ID'])) {
                     <div class="container">
 
                         <?php
-
-                        require ('Controllers/CategoryController.php');
                         if (isset($_POST['submit'])) {
                             $id = $_POST['id'];
-
-                            $result->getActiveCategories($id);
                             $sql = " SELECT b.id, b.author_id, b.title, b.short_desc, b.description, b.image, b.date, b.status 
                         FROM blogs b 
                         INNER JOIN blog_categories bc ON b.id = bc.blog_id 
                         WHERE bc.category_id = $id AND b.status = 1
                     ";
-                            $categories = $connection->query($sql);
-                            $category = $categories->fetch_assoc();
-                            print_r($category);
+                            $categories = $connection->query($sql)->fetch_row();
+                            print_r($categories);
+                            die();
                         }
                         ?>
                         <div class="card"

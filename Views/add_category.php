@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add Blog</title>
+    <title>Add Category</title>
     <!-- Custom fonts for this template-->
     <link href="./public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
@@ -91,57 +91,28 @@
 <body class="bg-light">
     <div class="container">
         <div class="card card-login mx-auto mt-5">
-            <div class="card-header text-center">Add Blog</div>
+            <div class="card-header text-center">Add Category</div>
             <?php if ($error): ?>
                 <div class="alert alert-danger mt-3" role="alert">
                     <?php echo $error; ?>
                 </div>
             <?php endif; ?>
             <div class="card-body">
-                <form id="registrationForm" method="post" action="" name="employeeForm" enctype="multipart/form-data">
-                    <b>Banner:</b>
-                    <div class="mb-3">
-                        <!-- <label for="profileImage" class="form-control">Upload Image</label> -->
-                        <input type="file" id="profileImage" class="form-control-file" name="img">
-                    </div>
+                <form id="categoryForm" method="post" action="" name="categoryForm" enctype="multipart/form-data">
                     <!-- Title -->
                     <div class="mb-3">
                         <label for="title" class="form-label">Title:</label>
                         <input type="text" class="form-control" id="title" name="title" required>
-                    </div>
-                    <!-- Short Description -->
-                    <div class="mb-3">
-                        <label for="shortDesc" class="form-label">Short Description:</label>
-                        <input type="text" class="form-control" id="shortDesc" name="short_desc" required>
                     </div>
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
                         <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
                     </div>
-                    <!-- select available category -->
-                    <select id="category" name="category" class="form-control" required>
-                        <?php
-                        $data = $category->collectData('categories');
-                        while ($row = $data->fetch_assoc()) {
-                            echo "<option value='" . $row['id'] . "' $selected>" . $row['title'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <!-- Date -->
-                    <div class="mb-3">
-                        <label for="date" class="form-label">Date:</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
-                    </div>
-                    <br>
-                    <div class="mb-3">
-                        <label for="tags" class="form-label">Tags:</label>
-                        <input type="text" class="form-control" id="tags" name="tags"
-                            placeholder="Enter tags separated by commas">
-                    </div>
                     <br>
                     <div class="mb-3 text-left">
-                        <input type="submit" name="addblog" id="addblog" value="Add Blog" class="btn btn-primary">
+                        <input type="submit" name="addcategory" id="addcategory" value="Add Blog Category"
+                            class="btn btn-primary">
                     </div>
                 </form>
             </div>

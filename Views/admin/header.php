@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['IS_LOGIN']) && $_SESSION(['IS_LOGIN'] !== 'yes')) {
+if ($_SESSION['IS_LOGIN'] !== 'yes') {
     header('location:login');
     die();
 }
@@ -35,7 +35,7 @@ if (!isset($_SESSION['IS_LOGIN']) && $_SESSION(['IS_LOGIN'] !== 'yes')) {
                     <span>Manage Blog</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="users">
+                <a class="nav-link" href="manage_category">
                     <i class="fa fa-fw fa-user bg-dark"></i>
                     <span>Manage Catogories</span></a>
             </li>

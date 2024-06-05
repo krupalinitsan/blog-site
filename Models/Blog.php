@@ -3,9 +3,9 @@ require_once 'Models/Common.php';
 class Blog extends Common
 {
 
-    public function insertBlog($id, $title, $short_desc, $description, $image, $date)
+    public function insertBlog($id, $title, $short_desc, $description, $image, $date,$tags)
     {
-        $sql = "INSERT INTO blog (author_id,title, short_desc, description, image, date) VALUES ('$id','$title', '$short_desc', '$description', '$image', '$date')";
+        $sql = "INSERT INTO blog (author_id,title, short_desc, description, image, date,tags) VALUES ('$id','$title', '$short_desc', '$description', '$image', '$date','$tags')";
         if ($this->connection->query($sql) === TRUE) {
             return $this->connection->insert_id;
         } else {

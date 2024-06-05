@@ -49,7 +49,6 @@
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
                                 <div class="logo">
                                     <b><a class="navbar-brand mr-1 font-weight-bold" href="#">Blog-Site</a></b>
-
                                 </div>
                             </div>
                             <div class="col-md-7 col-lg-6 col-sm-5 col-xs-3">
@@ -62,8 +61,28 @@
                                                 Home
                                             </a>
                                         </li>
+
+                                        <!-- <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" style="color:#c43b68"
+                                                aria-expanded="false">
+                                                Categories
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                            
+                                                 $categories = $result->getActiveCategories();
+                                                 while ($row = $categories->fetch_assoc()) {
+                                                    echo '<option class="dropdown-item" href="userpage?id=' . $row['id'] . '">' . $row['title'] . '</option>';
+                                                 }
+                                                
+                                            </div>
+                                        </li> -->
+
+
+
                                         <!-- Add other static menu items as dropdown toggles -->
-                                        <li class="nav-item dropdown">
+
+                                        <!-- < class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1"
                                                 role="button" data-toggle="dropdown" aria-haspopup="true"
                                                 style="color:#c43b68" aria-expanded="false">
@@ -73,13 +92,6 @@
                                                 <a class="dropdown-item" href="categories.php?id=1">Category 1</a>
                                                 <a class="dropdown-item" href="categories.php?id=2">Category 2</a>
                                                 <!-- Add other dropdown items here -->
-                                            </div>
-                                        </li>
-
-                                </nav>
-
-
-
                             </div>
                             <div class="col-md-3 col-lg-4 col-sm-4 col-xs-4">
                                 <div class="header__right">
@@ -97,39 +109,44 @@
                                                 <br>
                                                 <a class="dropdown-item" href="add_blog">Add Blog</a>
                                                 <br>
-                                                <b>
-                                                    <a class="dropdown-item" href="logout.php">Logout</a></b>
+                                                <b><a class="dropdown-item" href="add_category">Add Blog
+                                                        Category</a></b>
+                                                <br>
+                                                <a class="dropdown-item" href="logout">Logout</a>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+                            </ul>
+                            </nav>
                         </div>
                     </div>
-                    <div class="mobile-menu-area"></div>
                 </div>
+                <div class="mobile-menu-area"></div>
             </div>
-        </header>
-        <div class="body__overlay"></div>
-        <div class="offset__wrapper">
-            <div class="search__area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="search__inner">
-                                <form action="search.php" method="get">
-                                    <input placeholder="Search here..." type="text" name="str">
-                                    <button type="submit"></button>
-                                </form>
-                                <div class="search__close__btn">
-                                    <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
-                                </div>
+    </div>
+    </header>
+    <div class="body__overlay"></div>
+    <div class="offset__wrapper">
+        <div class="search__area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="search__inner">
+                            <form action="search.php" method="get">
+                                <input placeholder="Search here..." type="text" name="str">
+                                <button type="submit"></button>
+                            </form>
+                            <div class="search__close__btn">
+                                <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

@@ -22,7 +22,7 @@ class BlogController
             $category = $_POST['category'];
             $date = $_POST['date'];
             $id = $_SESSION['ID'];
-
+            $tags = array_map('trim', explode(',', $_POST['tags'])); // Split tags by comma and trim spaces
             // Handle file upload
             $target_dir = "public/uploads/";
             $target_file = $target_dir . basename($_FILES["img"]["name"]);
@@ -44,7 +44,7 @@ class BlogController
             }
 
             // Insert blog into `blog` table
-            $blog_id = $this->blogModel->insertBlog($id, $title, $short_desc, $description, $image, $date);
+            $blog_id = $this->blogModel->insertBlog($id, $title, $short_desc, $description, $image, $date, $tags);
             if ($blog_id) {
                 // Insert into `blog_categories` table
                 if ($this->blogModel->insertBlogCategory($blog_id, $category)) {
