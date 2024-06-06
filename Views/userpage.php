@@ -1,102 +1,93 @@
 <?php
-require_once ('Controllers/CategoryController.php');
-if (!isset($_SESSION['ID'])) {
-    header('location :login');
+require_once 'Config/config.php';
+require_once 'Controllers/CategoryController.php';
+
+if (!isset($_SESSION['IS_LOGIN'])) {
+    header('Location: login');
+    exit();
+}
+$categoryController = new CategoryController($connection);
+$categories = $categoryController->showCategories();
+//  display data by filter and search
+if (isset($_POST['submit'])) {
+    $categoryId = $_POST['id'];
+    $search = $_POST['search'];
+    if (!empty($search)) {
+        $blogs = $categoryController->filterBlogsBySearch($search);
+    } else {
+        $blogs = $categoryController->filterBlogsByCategory($categoryId);
+    }
+} else {
+    $blogs = $categoryController->getLatestBlogs();
 }
 ?>
-<?php require ('Views/top.php') ?>
+<?php require 'Views/top.php'; ?>
 <div class="body__overlay"></div>
 
-<!-- Start Slider Area -->
-
 <!-- Start Main Area -->
-<div class="main__container">
-
-    <div class="row">
-        <!-- Blog Posts Section -->
-        <div class="col-md-8">
-
-            <div class="slider__container slider--one bg__cat--3">
-                <form method="POST">
-                    <select id="id" name="id" class="form-control" style="height: fit-content; width:auto" required>
-                        <?php
-                        $sql = "SELECT * FROM categories WHERE status = 1";
-                        $categories = $connection->query($sql);
-                        if ($categories->num_rows > 0) {
-                            while ($category = $categories->fetch_assoc()) {
-                                echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['title']) . '</option>';
-                            }
-                        } else {
-                            echo '<option value="">No categories available</option>';
-                        }
-                        ?>
-                    </select>
-                    <button type="submit" name="submit" class=" card-text-left btn btn-primary">Filter</button>
-                </form>
-
-                <!-- Start Single Slide -->
-                <div class="single__slide animation__style01 slider__fixed--height">
-                    <div class="container">
-
-                        <?php
-
-                        require ('Controllers/CategoryController.php');
-                        if (isset($_POST['submit'])) {
-                            $id = $_POST['id'];
-
-                            $result->getActiveCategories($id);
-                            $sql = " SELECT b.id, b.author_id, b.title, b.short_desc, b.description, b.image, b.date, b.status 
-                        FROM blogs b 
-                        INNER JOIN blog_categories bc ON b.id = bc.blog_id 
-                        WHERE bc.category_id = $id AND b.status = 1
-                    ";
-                            $categories = $connection->query($sql);
-                            $category = $categories->fetch_assoc();
-                            print_r($category);
-                        }
-                        ?>
-                        <div class="card"
-                            style="width: 18rem ; border: 1px solid black ; padding :20px ;border-radius:10px;">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title" style="color:#c43b68">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                            </ul>
-                            <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Slide -->
-
-            </div>
+<div class="slider__container slider--one bg__cat--3 ">
+    <form method="POST" class="form-inline mb-4">
+        <div class="form-group mr-3">
+            <select id="id" name="id" class="form-control">
+                <?php
+                if ($categories->num_rows > 0) {
+                    while ($category = $categories->fetch_assoc()) {
+                        echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['title']) . '</option>';
+                    }
+                } else {
+                    echo '<option value="">No categories available</option>';
+                }
+                ?>
+            </select>
         </div>
-        <!-- End Blog Posts Section -->
-
-        <!-- Tags Section -->
-        <div class="col-md-4">
-            <div class="tags__container">
-                <h5 style="color:#c43b68">Tags</h5>
-                <ul class="list-group">
-                    <li class="list-group-item">Tag 1</li>
-                    <li class="list-group-item">Tag 2</li>
-                    <li class="list-group-item">Tag 3</li>
-                    <!-- Add more tags as needed -->
-                </ul>
-            </div>
+        <div class="form-group mr-3">
+            <input type="text" name="search" class="form-control" placeholder="Search by title or tag"
+                value="<?php echo isset($_POST['search']) ? htmlspecialchars($_POST['search']) : ''; ?>">
         </div>
-        <!-- End Tags Section -->
+        <button type="submit" name="submit" class="btn btn-primary">Filter</button>
+    </form>
+    <br>
+    <!-- Main content -->
+    <div class="single__slide animation__style01">
+        <div class="container">
+            <?php
+            if ($blogs->num_rows > 0) {
+                while ($blog = $blogs->fetch_assoc()) {
+                    echo '<div class="card" style="width: 18rem; border: 1px solid black; padding: 20px; border-radius: 10px;">';
+                    $id = $blog['author_id'];
+                    $author = $categoryController->getAuthor($id);
+                    $row = $author->fetch_assoc();
+                    echo '<p class="card-text"><strong>' . htmlspecialchars($row['firstname']) . '</strong></p>';
+                    echo '<img src="' . htmlspecialchars($blog['image']) . '" class="card-img-top" alt="...">';
+                    echo '<br><br>';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title" style="color:#c43b68">' . htmlspecialchars($blog['title']) . '</h5>';
+                    echo '<br>';
+                    echo '<p class="card-text">' . htmlspecialchars($blog['short_desc']) . '</p>';
+                    echo '<br>';
+                    echo '</div>';
+                    echo '<b>Posted On:</b>';
+                    echo '<p class="card-text">' . htmlspecialchars($blog['date']) . '</p>';
+                    echo '<div class="card-body">';
+                    echo '<a href="blog_details?id=' . htmlspecialchars($blog['id']) . '" class="card-link" style="color:#df1054">Read more</a>';
+                    echo '</div>';
+                    echo '</div><br>';
+                    $tags = explode(',', $blog['tags']);
+                    if ($tags) {
+                        echo '<ul class="list-group" style="width: 400px">';
+                        foreach ($tags as $tag) {
+                            echo '<li class="list-group-item">' . htmlspecialchars($tag) . '</li>';
+                        }
+                        echo '</ul>';
+                    }
+                }
+            }
+            ?>
+        </div>
     </div>
+    <!-- End Main content -->
+
 </div>
+<!-- End Blog Posts Section -->
 <!-- End Main Area -->
-<!-- End Product Area -->
-<input type="hidden" id="qty" value="1" />
-<?php require ('Views/footer.php') ?>
+<?php require 'Views/footer.php'; ?>

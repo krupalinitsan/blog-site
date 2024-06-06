@@ -120,6 +120,7 @@
                         <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
                     </div>
                     <!-- select available category -->
+                    <label for="category" class="form-label">Blog Category</label>
                     <select id="category" name="category" class="form-control" required>
                         <?php
                         $data = $category->collectData('categories');

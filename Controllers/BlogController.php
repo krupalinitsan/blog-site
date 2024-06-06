@@ -12,6 +12,7 @@ class BlogController
 
     }
 
+    // method for adding blog 
     public function addBlog()
     {
         $error = '';
@@ -22,7 +23,8 @@ class BlogController
             $category = $_POST['category'];
             $date = $_POST['date'];
             $id = $_SESSION['ID'];
-            $tags = array_map('trim', explode(',', $_POST['tags'])); // Split tags by comma and trim spaces
+            $tagsArray = array_map('trim', explode(',', $_POST['tags']));
+            $tagsString = implode(',', $tagsArray);
             // Handle file upload
             $target_dir = "public/uploads/";
             $target_file = $target_dir . basename($_FILES["img"]["name"]);
@@ -44,7 +46,7 @@ class BlogController
             }
 
             // Insert blog into `blog` table
-            $blog_id = $this->blogModel->insertBlog($id, $title, $short_desc, $description, $image, $date, $tags);
+            $blog_id = $this->blogModel->insertBlog($id, $title, $short_desc, $description, $image, $date, $tagsString);
             if ($blog_id) {
                 // Insert into `blog_categories` table
                 if ($this->blogModel->insertBlogCategory($blog_id, $category)) {
@@ -71,5 +73,20 @@ class BlogController
 
         $category = $this->commonModel;
         include_once 'Views/add_blog.php';
+    }
+
+    // read more implementation 
+    public function viewBlogDetails()
+    {
+        if (isset($_GET['id'])) {
+            $blogId = (int) $_GET['id'];
+
+            $result = $this->blogModel->getBlogDescription($blogId);
+
+            if ($result->num_rows > 0) {
+                $blog = $result->fetch_assoc();
+                include 'Views/blog_details.php';
+            }
+        }
     }
 }

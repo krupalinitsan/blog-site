@@ -9,6 +9,7 @@ class CategoryController
         $this->categoryModel = new Category($connection);
     }
 
+    // add new blog category 
     public function addCategory()
     {
         $error = '';
@@ -32,10 +33,29 @@ class CategoryController
     }
 
     // fetch catogories for front page 
-
-    public function getActiveCategories()
+    public function showCategories()
     {
-        $result = $this->categoryModel;
-        include_once 'Views/userpage.php';
+        return $this->categoryModel->getActiveCategories();
     }
+    // fetch blog taht have selected category
+    public function filterBlogsByCategory($categoryId)
+    {
+        return $this->categoryModel->getBlogsByCategory($categoryId);
+    }
+    // get Auther name 
+    public function getAuthor($id)
+    {
+        return $this->categoryModel->getUser($id);
+    }
+    //get latest 5 blocks by date 
+    public function getLatestBlogs()
+    {
+        return $this->categoryModel->getLatestBlogs();
+    }
+    // get blog by search data 
+    public function filterBlogsBySearch($search)
+    {
+        return $this->categoryModel->getSerachData($search);
+    }
+
 }

@@ -100,12 +100,12 @@
             <div class="card-body">
                 <form id="registrationForm" method="post" action="" name="employeeForm" enctype="multipart/form-data">
                     <div class="text-center mb-3">
-                        <img src="<?php echo $user['image']; ?>" alt="User Image" class="rounded-circle" style="    height: 100px;
-    width: 100px;">
+                        <img src="<?php echo $user['image']; ?>" alt="User Image" class="rounded-circle"
+                            style=" height: 100px; width: 100px;">
                     </div>
                     <div class="text-center mb-3">
                         <label for="profileImage" class="custom-file-upload">Upload Profile Image</label>
-                        <input type="file" id="profileImage" class="form-control-file" name="img"> 
+                        <input type="file" id="profileImage" class="form-control-file" name="img">
                     </div>
                     <div class="mb-3">
                         <label for="fname" class="form-label">First Name</label>

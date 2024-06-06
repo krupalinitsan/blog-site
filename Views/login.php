@@ -1,3 +1,9 @@
+<?php
+if (isset($_SESSION['IS_LOGIN'])) {
+    header('Location: userpage');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -10,6 +10,7 @@ class LoginController
     {
         $this->userModel = new User($connection);
     }
+    // register user method
     public function register()
     {
         $error = '';
@@ -29,23 +30,20 @@ class LoginController
         }
         include_once 'Views/register.php';
     }
+    //handle login method
     public function login()
     {
-        $error = '';
-
         $error = '';
         if (isset($_POST['submit'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
-
             $user = $this->userModel->loginUser($email, $password);
 
             if ($user) {
                 session_start();
-
                 $_SESSION['ID'] = $user['id'];
                 $_SESSION['IS_LOGIN'] = 'yes';
-
+                // defiened admin
                 if ($user['email'] == "divya@nitsantech.com" && $user['password'] == "905be71dbaa36d071ea83d9a5d2a8c80") {
                     header("Location: dashboard");
                     exit();

@@ -21,7 +21,7 @@ if ($_SESSION['IS_LOGIN'] !== 'yes') {
 </head>
 
 <body id="page-top">
-    <nav class="navbar navbar-expand navbar-dark static-top" style="background-color:#c43b68">
+    <nav class="navbar navbar-expand navbar-dark static-top" style="background-color:#d16488">
         <b><a class="navbar-brand mr-1 font-weight-bold" href="#">Blog-Site</a></b>
         <div class="d-none d-md-inline-block ml-auto"></div>
         <!-- Navbar -->
@@ -36,7 +36,7 @@ if ($_SESSION['IS_LOGIN'] !== 'yes') {
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="manage_category">
-                    <i class="fa fa-fw fa-user bg-dark"></i>
+                    <i class="fa-solid fa-layer-group bg-dark"></i>
                     <span>Manage Catogories</span></a>
             </li>
 

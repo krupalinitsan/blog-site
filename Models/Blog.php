@@ -3,9 +3,14 @@ require_once 'Models/Common.php';
 class Blog extends Common
 {
 
-    public function insertBlog($id, $title, $short_desc, $description, $image, $date,$tags)
+    public function insertBlog($id, $title, $short_desc, $description, $image, $date, $tagsString)
     {
-        $sql = "INSERT INTO blog (author_id,title, short_desc, description, image, date,tags) VALUES ('$id','$title', '$short_desc', '$description', '$image', '$date','$tags')";
+        $btitle = mysqli_real_escape_string($this->connection, $title);
+        $bshort_desc = mysqli_real_escape_string($this->connection, $short_desc);
+        $bdescription = mysqli_real_escape_string($this->connection, $description);
+        $btitle = mysqli_real_escape_string($this->connection, $title);
+
+        $sql = "INSERT INTO blog (author_id,title, short_desc, description, image, date,tags) VALUES ('$id','$btitle', '$bshort_desc', '$bdescription', '$image', '$date','$tagsString')";
         if ($this->connection->query($sql) === TRUE) {
             return $this->connection->insert_id;
         } else {
@@ -23,6 +28,13 @@ class Blog extends Common
     {
         $this->connection->close();
     }
+
+    public function getBlogDescription($blogId)
+    {
+        $sql = "SELECT * FROM blog WHERE id = $blogId AND status = 1";
+        return $this->connection->query($sql);
+    }
+
 }
 
 ?>
