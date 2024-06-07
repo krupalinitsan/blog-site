@@ -2,10 +2,10 @@
 require_once 'Config/config.php';
 require_once 'Controllers/CategoryController.php';
 
-if (!isset($_SESSION['IS_LOGIN'])) {
-    header('Location: login');
-    exit();
-}
+// if (!isset($_SESSION['IS_LOGIN'])) {
+//     header('Location: login');
+//     exit();
+// }
 $categoryController = new CategoryController($connection);
 $categories = $categoryController->showCategories();
 //  display data by filter and search
@@ -84,6 +84,8 @@ if (isset($_POST['submit'])) {
                             echo '</div>';
                         }
                     }
+                } else {
+                    echo "No record Found !";
                 }
                 ?>
 

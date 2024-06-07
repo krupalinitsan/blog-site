@@ -16,7 +16,7 @@ if (isset($_SERVER['PATH_INFO'])) {
 
     match ($path) {
         //login case
-        
+
         '/', '/login' => (new LoginController($connection))->login(),
         '/register' => (new LoginController($connection))->register(),
         '/userpage' => include ("Views/userpage.php"),

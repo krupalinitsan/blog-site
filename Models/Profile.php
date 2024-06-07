@@ -11,8 +11,10 @@ class Profile extends Common
     public function updateUser($id, $fname, $lname, $email, $password, $image = null)
     {
         // Base SQL update statement
-        $sql = "UPDATE users SET firstname='$fname', lastname='$lname', email='$email', password='$password'";
-        
+        $pass = md5($password);
+        $passwd = trim($pass);
+        $sql = "UPDATE users SET firstname='$fname', lastname='$lname', email='$email', password='$passwd'";
+
         // Append image update if provided
         if ($image !== null) {
             $sql .= ", image='$image'";
@@ -20,5 +22,5 @@ class Profile extends Common
         $sql .= " WHERE id='$id'";
         return $this->connection->query($sql);
     }
-    
+
 }

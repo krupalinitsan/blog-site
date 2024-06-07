@@ -25,28 +25,33 @@ class BlogController
             $id = $_SESSION['ID'];
             $tagsArray = array_map('trim', explode(',', $_POST['tags']));
             $tagsString = implode(',', $tagsArray);
+            $image = null;
+
             // Handle file upload
-            $target_dir = "public/uploads/";
-            $target_file = $target_dir . basename($_FILES["img"]["name"]);
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
+            if (!empty($_FILES["img"]["name"])) {
+                $target_dir = "public/uploads/";
+                $target_file = $target_dir . basename($_FILES["img"]["name"]);
+                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
 
-            if (!in_array($imageFileType, $allowed_types)) {
-                $error = "Only JPG, JPEG, PNG & GIF files are allowed.";
-                include 'Views/add_blog.php';
-                return;
+                if (!in_array($imageFileType, $allowed_types)) {
+                    $error = "Only JPG, JPEG, PNG & GIF files are allowed.";
+                    include 'Views/add_blog.php';
+                    return;
+                }
+
+                if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
+                    $image = $target_file;
+                } else {
+                    $error = "Sorry, there was an error uploading your file.";
+                    include 'Views/add_blog.php';
+                    return;
+                }
             }
 
-            if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
-                $image = $target_file;
-            } else {
-                $error = "Sorry, there was an error uploading your file.";
-                include 'Views/add_blog.php';
-                return;
-            }
 
             // Insert blog into `blog` table
-            $blog_id = $this->blogModel->insertBlog($id, $title, $short_desc, $description, $image, $date, $tagsString);
+            $blog_id = $this->blogModel->insertBlog($id, $title, $short_desc, $description,  $date, $tagsString,$image);
             if ($blog_id) {
                 // Insert into `blog_categories` table
                 if ($this->blogModel->insertBlogCategory($blog_id, $category)) {
