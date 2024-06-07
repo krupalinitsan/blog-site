@@ -75,13 +75,15 @@ class BlogController
         include_once 'Views/add_blog.php';
     }
 
+
     // read more implementation 
     public function viewBlogDetails()
     {
         if (isset($_GET['id'])) {
             $blogId = (int) $_GET['id'];
 
-            $result = $this->blogModel->getBlogDescription($blogId);
+            $result = $this->commonModel->getTable($blogId, 'blog');
+            // $result = $this->blogModel->getBlogDescription($blogId);
 
             if ($result->num_rows > 0) {
                 $blog = $result->fetch_assoc();

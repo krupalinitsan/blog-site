@@ -28,4 +28,14 @@ class Common
         return $this->connection->query($sql);
     }
 
+    public function getTable($blogId, $tableName)
+    {
+        $sql = "SELECT * FROM $tableName WHERE id = $blogId AND status = 1";
+        return $this->connection->query($sql);
+    }
+    public function getDataById($id, $tableName)
+    {
+        $sql = "SELECT * FROM $tableName  WHERE id = $id";
+        return $this->connection->query($sql)->fetch_assoc();
+    }
 }

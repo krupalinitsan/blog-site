@@ -8,10 +8,17 @@ class Profile extends Common
         $sql = "SELECT * FROM users  WHERE id = $id";
         return $this->connection->query($sql)->fetch_assoc();
     }
-
-    public function updateUser($id, $fname, $lname, $email, $password, $image)
+    public function updateUser($id, $fname, $lname, $email, $password, $image = null)
     {
-        $sql = "UPDATE users SET firstname= '$fname' ,lastname='$lname',email='$email' , password= '$password' , image= '$image' WHERE id='$id'";
+        // Base SQL update statement
+        $sql = "UPDATE users SET firstname='$fname', lastname='$lname', email='$email', password='$password'";
+        
+        // Append image update if provided
+        if ($image !== null) {
+            $sql .= ", image='$image'";
+        }
+        $sql .= " WHERE id='$id'";
         return $this->connection->query($sql);
     }
+    
 }

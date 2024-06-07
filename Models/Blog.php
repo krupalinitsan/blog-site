@@ -29,11 +29,6 @@ class Blog extends Common
         $this->connection->close();
     }
 
-    public function getBlogDescription($blogId)
-    {
-        $sql = "SELECT * FROM blog WHERE id = $blogId AND status = 1";
-        return $this->connection->query($sql);
-    }
 
 }
 

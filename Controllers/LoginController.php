@@ -49,6 +49,7 @@ class LoginController
                     exit();
                 } else {
                     header("Location: userpage");
+                    exit();
                 }
 
             } else {

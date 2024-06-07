@@ -17,7 +17,7 @@ class Category extends Common
         $result = $this->connection->query($sql);
         return $result;
     }
-
+    // blogs by categories
     public function getBlogsByCategory($categoryId)
     {
         $sql = "SELECT b.id, b.author_id, b.title, b.short_desc, b.description, b.image, b.date, b.status, b.tags, bc.category_id 
@@ -25,6 +25,7 @@ class Category extends Common
         $result = $this->connection->query($sql);
         return $result;
     }
+    //get user
     public function getUser($id)
     {
         $sql = "SELECT * FROM users WHERE id=$id";
@@ -32,7 +33,7 @@ class Category extends Common
         return $result;
 
     }
-
+    //latest blog by date
     public function getLatestBlogs($limit = 5)
     {
         $sql = "SELECT b.id, b.author_id, b.title, b.short_desc, b.description, b.image, b.date, b.status, b.tags 
@@ -43,7 +44,7 @@ class Category extends Common
         $result = $this->connection->query($sql);
         return $result;
     }
-
+    // search data
     public function getSerachData($search)
     {
         // $sql = "SELECT * FROM blog WHERE title LIKE '%$search%' OR tags LIKE '%$search%'LIMIT 0, 25";

@@ -10,7 +10,7 @@ class User extends Common
         $sql = "INSERT INTO users (firstname, lastname, email, password ) VALUES ('$fname','$lname','$email','$pass')";
         return $this->connection->query($sql);
     }
-
+    // method for user login
     public function loginUser($email, $password)
     {
         $pass = trim(md5($password));

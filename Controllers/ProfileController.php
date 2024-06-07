@@ -5,25 +5,27 @@ class ProfileController
 {
 
     private $profileModel;
-
+    private $commonModel;
     public function __construct($connection)
     {
         $this->profileModel = new Profile($connection);
+        $this->commonModel = new Common($connection);
     }
 
     public function updateProfile()
-    {
-        $error = '';
-        $id = $_SESSION['ID'];
-        if (isset($_POST['update'])) {
-            // Validate and sanitize user input
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $password = $_POST['password'];
-            $email = $_POST['email'];
+{
+    $error = '';
+    $id = $_SESSION['ID'];
+    if (isset($_POST['update'])) {
+        // Validate and sanitize user input
+        $fname = isset($_POST['fname']) ? trim($_POST['fname']) : null;
+        $lname = isset($_POST['lname']) ? trim($_POST['lname']) : null;
+        $password = isset($_POST['password']) ? trim($_POST['password']) : null;
+        $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+        $image = null;
 
-
-            // Handle file upload
+        // Handle file upload
+        if (!empty($_FILES["img"]["name"])) {
             $target_dir = "public/uploads/";
             $target_file = $target_dir . basename($_FILES["img"]["name"]);
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -42,25 +44,28 @@ class ProfileController
                 include 'Views/profile.php';
                 return;
             }
-
-            if (!empty($fname) && !empty($lname) && !empty($password) && !empty($email)) {
-                $updated = $this->profileModel->updateUser($id, $fname, $lname, $email, $password, $image);
-
-                if ($updated) {
-                    echo '<script>alert("Profile updated successfully."); 
-                    window.location.replace("profile");</script>';
-                    exit();
-                } else {
-                    $msg = "Failed to update profile. Please try again.";
-                }
-            } else {
-                $msg = "Please fill in all fields.";
-            }
         }
 
-        $user = $this->profileModel->getUserById($id);
-        include_once ('Views/profile.php');
+        // Check if all required fields are provided
+        if (!empty($fname) && !empty($lname) && !empty($password) && !empty($email)) {
+            $updated = $this->profileModel->updateUser($id, $fname, $lname, $email, $password, $image);
+
+            if ($updated) {
+                echo '<script>alert("Profile updated successfully."); 
+                window.location.replace("profile");</script>';
+                exit();
+            } else {
+                $msg = "Failed to update profile. Please try again.";
+            }
+        } else {
+            $msg = "Please fill in all fields.";
+        }
     }
+
+    // $user=$this->commonModel-> getDataById($id , 'users');
+    $user = $this->profileModel->getUserById($id);
+    include_once('Views/profile.php');
+}
 
 }
 ?>

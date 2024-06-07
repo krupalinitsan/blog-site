@@ -20,11 +20,9 @@
             border-radius: 50%;
             object-fit: cover;
         }
-
         .file-input {
             display: none;
         }
-
         .custom-file-upload {
             cursor: pointer;
             padding: 10px;
@@ -32,7 +30,6 @@
             color: #fff;
             border-radius: 5px;
         }
-
         .card-login {
             border: none;
             border-radius: 10px;
@@ -41,47 +38,39 @@
             /* Pink shade */
             padding: 30px;
         }
-
         .card-header {
             background-color: transparent;
             border-bottom: none;
             font-weight: bold;
             color: #333;
         }
-
         .form-label {
             font-weight: bold;
             color: #333;
         }
-
         .form-control {
             border-radius: 5px;
             border: 1px solid #ced4da;
             background-color: #fff;
         }
-
         .btn-primary {
             background-color: #ff69b4;
             /* Pink shade */
             border-color: #ff69b4;
         }
-
         .btn-primary:hover {
             background-color: #ff1493;
             /* Darker pink shade */
             border-color: #ff1493;
         }
-
         .error {
             font-size: 0.8rem;
             color: #dc3545;
             /* Red color for error messages */
         }
-
         .btn-link {
             color: #333;
         }
-
         .btn-link:hover {
             text-decoration: none;
         }
