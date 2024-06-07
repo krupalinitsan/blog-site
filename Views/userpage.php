@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
                         echo '</div><br>';
                         $tags = explode(',', $blog['tags']);
                         if ($tags) {
-                            echo '<ul class="list-group" style="width: 400px">';
+                            echo '<ul class="list-group" style="width: 290px">';
                             foreach ($tags as $tag) {
                                 echo '<li class="list-group-item">' . htmlspecialchars($tag) . '</li>';
                             }
